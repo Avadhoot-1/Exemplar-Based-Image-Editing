@@ -30,9 +30,9 @@ Intern Project @Adobe
    cd HPSv2
    pip install -e . 
    ```
+## Instructions to run the Project 
 
-## Obtaining LLaVA Instruction/ Caption
-For the directory structure
+Maintain the directory structure as follows:
 ```
 {image_folder}
 └───{subfolder1}
@@ -54,7 +54,23 @@ For the directory structure
     │   results will be stored here
 ```
 **Note: Names of the subfolder must contain underscore ('_') **
+Then run the following commands:
+- Resize all the images to 512*512
+  
+ ```
+python3 preprocess.py --directory [Path to image_folder]
+```
 
+- make an image concat.png in each exemplar folder
+  
+ ```
+python3 concat.py --img_fol [Path to image_folder]
+```
+
+## Obtaining LLaVA Instruction/ Caption
+```
+cd LLaVA
+```
 - The following command will make file 'edit.txt' for each subfolder in `image_folder` and this file will be stored in corrosponding subfolder in `result_folder`
 
 ```
@@ -81,6 +97,42 @@ python3 truncate_prompt.py --res_fol [path to result folder]
 python3 truncate_caption.py --res_fol [path to result folder]
 ```
 
+## Running LLaVA pipeline
+- The file `llava_pipeline.sh` performs the CT optimization (Train) and run all 3 methods Visii, LLaVA and CT + LLaVA for Img_CFG:1.5 and  3 different text_CFGs: [8,10,12]. This script also calculates s_visual score of the images.
+
+```
+./llava_pipeline.sh [Name of subdirectory] [Path to log folder] [Path to result folder] [Path to image folder]
+```
+For example:
+```
+./llava_pipeline.sh add_crown ./logs ./results ./images
+```
+
+- If you have to run the above script for all subfolders in image directory you can use the following command, which will run above script on all the subfolders in image folder
+
+```
+./superscript.sh [Path to log folder] [Path to result folder] [Path to image folder]
+```
+
+## TO obtain LLaVA + Caption Embeddings {For PnP}
+run the follwing script; This script will produce the file subfolder_llava+ct.pt in the folder PT_folder for all subfolders in image_folder.
+
+```bash
+./superscript.sh [Path to log folder {To get CT}] [Path to result folder {To get file inv_cap.txt}] [Path to image folder] [Path to PT_folder]
+```
+
+## The Result Folder:
+# Images
+
+File: ```ct_llava_img_1.5_cond_8:0_0.png``` means that the method used is CT + LLaVA; Image CFG is 1.5; text CFG is 8. and since for each hyperparameter 8 images are generated; these images are represented by 0_0, 0_1, 1_0, 1_1, 2_0, 2_1, 3_0, 3_1.
+
+Relevant Parameters:
+```python
+  method: ['only_ct', 'only_llava', 'ct_llava']
+  IMG_CFG: [1.5]
+  Text_CFG: [8, 10, 12]
+  ```
+   
 
 
 
