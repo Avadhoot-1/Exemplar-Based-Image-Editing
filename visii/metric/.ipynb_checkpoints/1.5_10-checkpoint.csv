@@ -1,0 +1,8 @@
+,Metric,only_ct,only_llava,ct_llava
+0,lpips,"mean: 0.38, var: 0.0296","mean: 0.29, var: 0.0340","mean: 0.21, var: 0.0242"
+1,fid,"mean: 8.23, var: 71.9771","mean: 9.44, var: 72.0076","mean: 8.12, var: 58.8787"
+2,hps,"mean: 0.19, var: 0.0011","mean: 0.20, var: 0.0013","mean: 0.20, var: 0.0012"
+3,ssim,"mean: 0.48, var: 0.0238","mean: 0.55, var: 0.0290","mean: 0.62, var: 0.0221"
+4,clip,"mean: 24.46, var: 8.9667","mean: 23.58, var: 11.7411","mean: 23.68, var: 11.0089"
+5,dir_sim,"mean: 0.04, var: 0.0019","mean: 0.04, var: 0.0026","mean: 0.04, var: 0.0025"
+6,s_vis,"mean: 0.17, var: 0.0148","mean: 0.10, var: 0.0264","mean: 0.12, var: 0.0243"
