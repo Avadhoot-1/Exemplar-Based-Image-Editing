@@ -132,8 +132,16 @@ Relevant Parameters:
   IMG_CFG: [1.5]
   Text_CFG: [8, 10, 12]
   ```
-   
+Metric Scores:
+Each subfolder in result folder contains file `{metric}_` 
 
+## Metric Calculation:
 
-
+- For clip score: Use conda envirnment [llava]: Use the file metric/clip_score.py. Currently this method calculates the metric score for each of the three method- "only_ct", "only_llava", "ct_llava"; on all hyperparameters 1.5_8, 1.5_10, 1.5_12.
+it take a folder of exemple pair images; and their result folder as input and stores the metrics for given method `method` in the file clip_`method`.json in corrosponding result folder. This file will contain key as hyperparameter and corrosponding value will be average of metric score of all 8 images  produced by model for that hyperparameter. 
+- Similarly, for metric/directional_clip.py: [use `llava` environment ]. It also takes input image folder path and result folder path and generate a file dir_sim_`method`.py. again this will contain hyperparameters as keys and corrosponding value will be average of metric score of all 8 images  produced by model for that hyperparameter.
+- For the file scores.py [Use `llava` env]. {This file assumes images are in the folder `/mnt/localssd/avadhoot/image_folders1`}. It takes just the name (and not path) of subfolder as input and then for each method it makes 3 files corrosponding to 3 metrics: `ssim`, `lpips` and `fid` as ssim_method.json, lpips_method.json, fid_method.json
+- For the file hps.py [use `hps` environment {mentioned in setup}]. This file also assumes that the images are in the folder `/mnt/localssd/avadhoot/image_folders1`, and for subfolder given as argumnt it creates a file hps_method.json in corrosponding result folder which stores the average socre of 8 images produced by model for that hyperparameter.
+- For the metric s_visual, you can use the file pnp_metric/pnp_result.py and modify it similar to above files.
+- There are scripts to run above files for all subfolders in the folder metric.
 
