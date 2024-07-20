@@ -133,7 +133,16 @@ Relevant Parameters:
   Text_CFG: [8, 10, 12]
   ```
 Metric Scores:
-Each subfolder in result folder contains file `{metric}_` 
+```python
+metric = ['lpips', 'fid', 'ssim', 'dir_sim', 's_vis', 'clip', 'hps']
+method = ['only_ct', 'only_llava', 'ct_llava']
+```
+Each subfolder in result folder contains file `{metric}_{method}.json` which  contains the score for above mentioned hyperparameters for that metric and that method.
+
+# For PnP + Clipdiff + llava results:
+Images: For first 45 images: the results are stored in the image folder itself.
+For the rest 180 images the results are stored in the corrosponding result folder with the name: `pnpclipdiff_llava_scale_{scale}.png'` where scale is from [10, 15, 20].
+The corrosponding metric score are stored in image folder itself for all 225 images. There is a json file corrosponding to each 'hyperparameter' and in this file there are 'metric_names' as keys and the corrosponding values are the metric score for that image. {Note that this is different from the other 3 experiments.}
 
 ## Metric Calculation:
 
