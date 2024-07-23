@@ -13,13 +13,14 @@ if __name__ == "__main__":
     # fol = args.fol
     scale = args.param
     for fol in os.listdir(f'/mnt/localssd/ashutosh/images/'):
+        print("[INFO] Currently on: ", fol)
         img1 = f'/mnt/localssd/ashutosh/images/{fol}/0_0.png'
         img2 = f'/mnt/localssd/ashutosh/images/{fol}/0_1.png'
         img3 = f'/mnt/localssd/ashutosh/images/{fol}/1_0.png'
         img4 = f'/mnt/localssd/ashutosh/results/{fol}/clipdiff+clipC+pnp.png'
         if not os.path.exists(img4):
             print("Not found ", fol)
-            exit(0)
+            continue
         s_vis_score = get_s_visual(img1, img2, img3, img4)
         data_dict = {}
         data_dict['s_visual'] = float(s_vis_score)

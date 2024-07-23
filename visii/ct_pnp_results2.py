@@ -17,12 +17,14 @@ if __name__ == "__main__":
     fol = args.fol
     scale = args.param
     for fol in os.listdir(f'/mnt/localssd/ashutosh/images/'):
+        print("[INFO] Currently on: ", fol)
         img1 = f'/mnt/localssd/ashutosh/images/{fol}/0_0.png'
         img2 = f'/mnt/localssd/ashutosh/images/{fol}/0_1.png'
         img3 = f'/mnt/localssd/ashutosh/images/{fol}/1_0.png'
         img4 = f'/mnt/localssd/ashutosh/results/{fol}/clipdiff+clipC+pnp.png'
         if not os.path.exists(img4):
-            exit(0)
+            print("[ERROR] Not found ", fol)
+            continue
 
         img_fol = f'/mnt/localssd/ashutosh/images/{fol}/ins.txt'
         with open(img_fol, 'r') as file:

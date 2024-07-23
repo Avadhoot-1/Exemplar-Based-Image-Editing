@@ -11,6 +11,7 @@ if __name__ == "__main__":
     fol = args.fol
     scale = args.param
     for fol in os.listdir(f'/mnt/localssd/ashutosh/images/'):
+        print("[INFO] Currently on: ", fol)
         img_fol = f'/mnt/localssd/ashutosh/images/{fol}/ins.txt'
         with open(img_fol, 'r') as file:
             s = file.read()
@@ -19,8 +20,8 @@ if __name__ == "__main__":
         img3 = f'/mnt/localssd/ashutosh/images/{fol}/1_0.png'
         img4 = f'/mnt/localssd/ashutosh/results/{fol}/clipdiff+clipC+pnp.png'
         if not os.path.exists(img4):
-            print("Not found ", fol)
-            exit(0)
+            print("[ERROR] Not found ", fol)
+            continue
         dir_sim_score = dir_similarity(Image.open(img3), Image.open(img4), s).item()
         with open(f'/mnt/localssd/ashutosh/images/{fol}/clipdiff+clipC+pnp.json', 'r') as file:
             data_dict = json.load(file)
