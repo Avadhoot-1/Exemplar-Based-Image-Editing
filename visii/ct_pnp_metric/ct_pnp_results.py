@@ -12,17 +12,17 @@ if __name__ == "__main__":
     args = parser.parse_args()
     fol = args.fol
     scale = args.param
-    img1 = f'/mnt/localssd/avadhoot/image_folders1/{fol}/0_0.png'
-    img2 = f'/mnt/localssd/avadhoot/image_folders1/{fol}/0_1.png'
-    img3 = f'/mnt/localssd/avadhoot/image_folders1/{fol}/1_0.png'
-    img4 = f'/mnt/localssd/avadhoot/results/{fol}/pnpclipdiff_llava_scale_{args.param}.png'
+    img1 = f'/mnt/localssd/ashutosh/images/{fol}/0_0.png'
+    img2 = f'/mnt/localssd/ashutosh/images/{fol}/0_1.png'
+    img3 = f'/mnt/localssd/ashutosh/images/{fol}/1_0.png'
+    img4 = f'/mnt/localssd/ashutosh/results/{fol}/clipdiff+clipC+pnp.png'
     if not os.path.exists(img4):
         print("Not found ", fol)
         exit(0)
     s_vis_score = get_s_visual(img1, img2, img3, img4)
     data_dict = {}
     data_dict['s_visual'] = float(s_vis_score)
-    with open(f'/mnt/localssd/avadhoot/image_folders1/{fol}/ct_pnp_{scale}.json', 'w') as file:
+    with open(f'/mnt/localssd/ashutosh/images/{fol}/clipdiff+clipC+pnp.json', 'w') as file:
         json.dump(data_dict, file)
 
     
