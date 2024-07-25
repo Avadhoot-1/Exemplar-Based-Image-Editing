@@ -118,7 +118,7 @@ For example:
 run the follwing script; This script will produce the file subfolder_llava+ct.pt in the folder PT_folder for all subfolders in image_folder.
 
 ```bash
-./superscript.sh [Path to log folder {To get CT}] [Path to result folder {To get file inv_cap.txt}] [Path to image folder] [Path to PT_folder]
+./superscript_cap.sh [Path to log folder {To get CT}] [Path to result folder {To get file inv_cap.txt}] [Path to image folder] [Path to PT_folder]
 ```
 
 ## The Result Folder:
