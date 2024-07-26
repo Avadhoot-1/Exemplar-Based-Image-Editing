@@ -5,6 +5,8 @@ import os
 from tqdm import tqdm
 import argparse
 import warnings
+import time
+import numpy as np
 
 # Suppress specific warnings
 warnings.filterwarnings("ignore", category=UserWarning)
@@ -21,12 +23,25 @@ tokenizer, model, image_processor, context_len = load_pretrained_model(
 )
 
 root_dir = args.img_fol
-subdirs= []
-for root, dirs, files in os.walk(root_dir):
-    for subdir in dirs:
-        if ('_' in subdir and 'ipynb' not in subdir):
-            subdirs.append(subdir)
-for sd in tqdm(subdirs):            
+subdirs= [
+        "sor_fox",
+        "poc_rose",
+        "style_woodcarving",
+        "bg_fog",
+        "style_palm",
+        "sor_mountain2desert",
+        "style_skeleton",
+        "sor_leopard",
+        "poc_skeleton",
+        "sor_cowboy"
+    ]
+# for root, dirs, files in os.walk(root_dir):
+#     for subdir in dirs:
+#         if ('_' in subdir and 'ipynb' not in subdir):
+#             subdirs.append(subdir)
+time_taken = []
+for sd in tqdm(subdirs):      
+    start_time = time.time()      
     prompt = "Given image grid contains two images image1 on left and image2 on right. image2 is edited version of image1. Explain what edits are done on image1 to get image2. These edits can include addition or removal of objects, One object changing into some other object, change of style, etc. explain the edits in detail. Describe the edits only, for the things which are not changes or edited do not mention them, ignore the minor changes, focus on edit at broader level. Give your answer in less than 100 words in a single paragraph (Do not give numbered list). Your edits should be such that using that information on image1 we should be able to generate image2"
 
     # Load image path from command-line argument
@@ -51,4 +66,6 @@ for sd in tqdm(subdirs):
     # Write the output to a file
     with open(os.path.join(args.res_fol, sd, 'edit.txt'), 'w') as file:
         file.write(out)
-
+    time_taken.append(time.time() - start_time)
+print("Average time taken for each subfolder: ", np.mean(time_taken))
+print("Variance of time taken for each subfolder: ", np.var(time_taken))

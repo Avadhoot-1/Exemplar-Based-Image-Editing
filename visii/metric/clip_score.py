@@ -29,35 +29,35 @@ def get_clip_score(img_fol, folder):
             a3 = []
             for k in range(4):
                 for l in range(2):
-                    imgs_path_only_ct.append(f'{folder}/only_ct_img_{i}_cond_{j}:{k}_{l}.png')
-                    curr_img = Image.open(imgs_path_only_ct[-1])
-                    tensor_image = transforms.ToTensor()(curr_img)
-                    tensor_image_scaled = tensor_image * 255.0
-                    tensor_image_scaled = tensor_image_scaled.to(torch.uint8)
-                    score = metric(tensor_image_scaled, s)
-                    p = score.detach()
-                    a1.append(float(p))
+            #         imgs_path_only_ct.append(f'{folder}/only_ct_img_{i}_cond_{j}:{k}_{l}.png')
+            #         curr_img = Image.open(imgs_path_only_ct[-1])
+            #         tensor_image = transforms.ToTensor()(curr_img)
+            #         tensor_image_scaled = tensor_image * 255.0
+            #         tensor_image_scaled = tensor_image_scaled.to(torch.uint8)
+            #         score = metric(tensor_image_scaled, s)
+            #         p = score.detach()
+            #         a1.append(float(p))
                     
-                    imgs_path_only_llava.append(f'{folder}/only_llava_img_{i}_cond_{j}:{k}_{l}.png')
-                    curr_img = Image.open(imgs_path_only_llava[-1])
-                    tensor_image = transforms.ToTensor()(curr_img)
-                    tensor_image_scaled = tensor_image * 255.0
-                    tensor_image_scaled = tensor_image_scaled.to(torch.uint8)
-                    score = metric(tensor_image_scaled, s)
-                    p = score.detach()
-                    a2.append(float(p))
+            #         imgs_path_only_llava.append(f'{folder}/only_llava_img_{i}_cond_{j}:{k}_{l}.png')
+            #         curr_img = Image.open(imgs_path_only_llava[-1])
+            #         tensor_image = transforms.ToTensor()(curr_img)
+            #         tensor_image_scaled = tensor_image * 255.0
+            #         tensor_image_scaled = tensor_image_scaled.to(torch.uint8)
+            #         score = metric(tensor_image_scaled, s)
+            #         p = score.detach()
+            #         a2.append(float(p))
                     
-                    imgs_path_ct_llava.append(f'{folder}/ct_llava_img_{i}_cond_{j}:{k}_{l}.png')
-                    curr_img = Image.open(imgs_path_ct_llava[-1])
-                    tensor_image = transforms.ToTensor()(curr_img)
-                    tensor_image_scaled = tensor_image * 255.0
-                    tensor_image_scaled = tensor_image_scaled.to(torch.uint8)
-                    score = metric(tensor_image_scaled, s)
-                    p = score.detach()
-                    a3.append(float(p))
-            result_only_ct[f'{i}_{j}'] = sum(a1)/len(a1)
-            result_only_llava[f'{i}_{j}'] = sum(a2)/len(a2)
-            result_ct_llava[f'{i}_{j}'] = sum(a3)/len(a3)
+            #         imgs_path_ct_llava.append(f'{folder}/ct_llava_img_{i}_cond_{j}:{k}_{l}.png')
+            #         curr_img = Image.open(imgs_path_ct_llava[-1])
+            #         tensor_image = transforms.ToTensor()(curr_img)
+            #         tensor_image_scaled = tensor_image * 255.0
+            #         tensor_image_scaled = tensor_image_scaled.to(torch.uint8)
+            #         score = metric(tensor_image_scaled, s)
+            #         p = score.detach()
+            #         a3.append(float(p))
+            # result_only_ct[f'{i}_{j}'] = sum(a1)/len(a1)
+            # result_only_llava[f'{i}_{j}'] = sum(a2)/len(a2)
+            # result_ct_llava[f'{i}_{j}'] = sum(a3)/len(a3)
     # print(result_only_ct)     
     with open(f'{folder}/clip_only_ct.json', 'w') as file:
         json.dump( result_only_ct, file)
